@@ -34,20 +34,20 @@
               <h1>Feel free to explore NYC Parking Signs !</h1>
             </div>
 
-            <div class="grid-25">
-                
-                <!-- Log in/Log out -->
-                {% if current_user.is_authenticated() %}
-                <a href="{{ url_for('logout') }}" class="icon-power" title="Log out"></a>
+{#            <div class="grid-25">#}
+{#                #}
+{#                <!-- Log in/Log out -->#}
+{#                {% if current_user.is_authenticated() %}#}
+{#                <a href="{{ url_for('logout') }}" class="icon-power" title="Log out"></a>#}
 {#                  <a href="{{ url_for('logout') }}" title="Log out" class="grid-100">Log out</a>#}
-                {% else %}
-                <a href="{{ url_for('login') }}" class="icon-power" title="Log in"></a>
+{#                {% else %}#}
+{#                <a href="{{ url_for('login') }}" class="icon-power" title="Log in"></a>#}
 {#                <a href="{{ url_for('login') }}" title="Log in">Log in</a>#}
-                <a href="{{ url_for('register') }}" class="icon-profile" title="Register"></a>
+{#                <a href="{{ url_for('register') }}" class="icon-profile" title="Register"></a>#}
 {#                <a href="{{ url_for('register') }}" title="Register" class="grid-100">Register</a>#}
-                {% endif %}
-                
-            </div>
+{#                {% endif %}#}
+{#                #}
+{#            </div>#}
 
           </div>
 

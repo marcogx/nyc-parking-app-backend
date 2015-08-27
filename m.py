@@ -47,19 +47,19 @@
 # 		db_table = 'parkingsigns'
 #
 #
-# # if 'HEROKU' in os.environ:
-# # 	import urlparse, psycopg2
-# # 	urlparse.uses_netloc.append('postgres')
-# # 	url = urlparse.urlparse(os.environ["DATABASE_URL"])
-# # 	db = PostgresqlDatabase(database=url.path[1:], user=url.username, password=url.password, host=url.hostname, port=url.port)
-# # 	DATABASE.initialize(db)
-# # 	DEBUG = True
-# # else:
-# # 	db = SqliteDatabase('nyc-parking-app-backend.db')
-# # 	DATABASE.initialize(db)
-# #
-# #
-# # def initialize():
-# # 	DATABASE.connect()
-# # 	DATABASE.create_tables([User, ], safe=True)
-# # 	DATABASE.close()
+# if 'HEROKU' in os.environ:
+# 	import urlparse, psycopg2
+# 	urlparse.uses_netloc.append('postgres')
+# 	url = urlparse.urlparse(os.environ["DATABASE_URL"])
+# 	db = PostgresqlDatabase(database=url.path[1:], user=url.username, password=url.password, host=url.hostname, port=url.port)
+# 	DATABASE.initialize(db)
+# 	DEBUG = True
+# else:
+# 	db = SqliteDatabase('nyc-parking-app-backend.db')
+# 	DATABASE.initialize(db)
+#
+#
+# def initialize():
+# 	DATABASE.connect()
+# 	DATABASE.create_tables([User, ], safe=True)
+# 	DATABASE.close()
