@@ -132,9 +132,19 @@ def not_found(error):
 
 
 if __name__ == '__main__':
+	models.initialize()
+	try:
+		models.User.create_user(
+			username='TestClient',
+			email='t@t.com',
+			password='123456',
+			admin=False
+		)
+	except ValueError:
+		pass
 	global sign_locations, sign_contents
 	sign_locations, sign_contents = get_signs_of_center()
-	# print sign_locations
-	# print sign_contents,
-	# print len(sign_locations), len(sign_contents)
+	print sign_locations
+	print sign_contents,
+	print len(sign_locations), len(sign_contents)
 	application.run(debug=models.DEBUG, host=HOST, port=PORT)
