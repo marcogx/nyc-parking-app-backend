@@ -144,7 +144,7 @@ if __name__ == '__main__':
 	# 	pass
 	global sign_locations, sign_contents
 	sign_locations, sign_contents = get_signs_of_center()
-	print sign_locations
-	print sign_contents,
+	# print sign_locations
+	# print sign_contents,
 	print len(sign_locations), len(sign_contents)
 	application.run(debug=True)
