@@ -16,8 +16,8 @@ import csv
 application = Flask(__name__)
 application.secret_key = '^tnm!&xvm!gor-l^jh$8jqmp^@q3dtwurv7nz*+j3tk=t%16o0'
 
-GoogleMaps(application)
-geolocator = GoogleV3()
+# GoogleMaps(application)
+# geolocator = GoogleV3()
 
 # login_manager = LoginManager()
 # login_manager.init_app(application)
@@ -109,22 +109,22 @@ def index():
 	global map_center, sign_locations, sign_contents
 	form = forms.PostForm()
 
-	if form.validate_on_submit():
-		addr = form.content.data.strip()
-		location = None
-		try:
-			location = geolocator.geocode(addr)
-			if not location:
-				flash("Something wrong with your address typed or your network problem ", "error")
-		except:
-			flash("Something wrong with your address typed or your network problem ", "error")
-		if location:
-			map_center = location.latitude, location.longitude
-			sign_locations, sign_contents = get_signs_of_center(location.latitude, location.longitude)
-	return render_template('parking_signs.html', form=form,
-	                       lat=map_center[0], lng=map_center[1],
-	                       locations=sign_locations, contents=sign_contents)
-
+	# if form.validate_on_submit():
+	# 	addr = form.content.data.strip()
+	# 	location = None
+	# 	try:
+	# 		location = geolocator.geocode(addr)
+	# 		if not location:
+	# 			flash("Something wrong with your address typed or your network problem ", "error")
+	# 	except:
+	# 		flash("Something wrong with your address typed or your network problem ", "error")
+	# 	if location:
+	# 		map_center = location.latitude, location.longitude
+	# 		sign_locations, sign_contents = get_signs_of_center(location.latitude, location.longitude)
+	# return render_template('parking_signs.html', form=form,
+	#                        lat=map_center[0], lng=map_center[1],
+	#                        locations=sign_locations, contents=sign_contents)
+	return render_template("index.html")
 
 @application.errorhandler(404)
 def not_found(error):
@@ -146,5 +146,6 @@ if __name__ == '__main__':
 	sign_locations, sign_contents = get_signs_of_center()
 	# print sign_locations
 	# print sign_contents,
+	# GoogleMaps(application)
 	print len(sign_locations), len(sign_contents)
 	application.run(debug=True)
