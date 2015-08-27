@@ -16,8 +16,8 @@ import csv
 application = Flask(__name__)
 application.secret_key = '^tnm!&xvm!gor-l^jh$8jqmp^@q3dtwurv7nz*+j3tk=t%16o0'
 
-# GoogleMaps(application)
-# geolocator = GoogleV3()
+GoogleMaps(application)
+geolocator = GoogleV3()
 
 # login_manager = LoginManager()
 # login_manager.init_app(application)
@@ -121,10 +121,10 @@ def index():
 	# 	if location:
 	# 		map_center = location.latitude, location.longitude
 	# 		sign_locations, sign_contents = get_signs_of_center(location.latitude, location.longitude)
-	# return render_template('parking_signs.html', form=form,
-	#                        lat=map_center[0], lng=map_center[1],
-	#                        locations=sign_locations, contents=sign_contents)
-	return render_template("index.html")
+	return render_template('parking_signs.html', form=form,
+	                       lat=map_center[0], lng=map_center[1],
+	                       locations=sign_locations, contents=sign_contents)
+	# return render_template("index.html")
 
 @application.errorhandler(404)
 def not_found(error):

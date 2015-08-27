@@ -38,19 +38,20 @@
     {% set style = "width:800px;height:650px;"%}
     {% set locations =  locations %}
     {% set contents = contents %}
-
-    {{
-      googlemap(
-          "sign_map",
-          center_lat,
-          center_lng,
-          zoom=18,
-          infobox=contents,
-          markers={'http://maps.google.com/mapfiles/ms/icons/red-dot.png':[(center_lat, center_lng)],
-                    'http://maps.google.com/mapfiles/ms/icons/green-dot.png':locations},
-          style=style
-      )
-    }}
+    {{ locations }}
+    {{ contents }}
+{#    {{#}
+{#      googlemap(#}
+{#          "sign_map",#}
+{#          center_lat,#}
+{#          center_lng,#}
+{#          zoom=18,#}
+{#          infobox=contents,#}
+{#          markers={'http://maps.google.com/mapfiles/ms/icons/red-dot.png':[(center_lat, center_lng)],#}
+{#                    'http://maps.google.com/mapfiles/ms/icons/green-dot.png':locations},#}
+{#          style=style#}
+{#      )#}
+{#    }}#}
 
   {% endwith %}
 
