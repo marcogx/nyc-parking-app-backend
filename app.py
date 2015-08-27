@@ -3,7 +3,7 @@ from flask import (Flask, g, render_template, flash,
 from flask.ext.bcrypt import check_password_hash
 from flask.ext.login import (LoginManager, login_user, logout_user,
                              login_required, current_user)
-from flask_googlemaps import GoogleMaps
+from flask_googlemaps import GoogleMaps, Map
 from geopy.geocoders import GoogleV3
 import forms
 # import models
@@ -13,14 +13,14 @@ import csv
 # PORT = 8004
 # HOST = '0.0.0.0'
 
-application = Flask(__name__)
-application.secret_key = '^tnm!&xvm!gor-l^jh$8jqmp^@q3dtwurv7nz*+j3tk=t%16o0'
+app = Flask(__name__)
+app.secret_key = '^tnm!&xvm!gor-l^jh$8jqmp^@q3dtwurv7nz*+j3tk=t%16fffo0'
 
-GoogleMaps(application)
+# GoogleMaps(app)
 geolocator = GoogleV3()
 
 # login_manager = LoginManager()
-# login_manager.init_app(application)
+# login_manager.init_app(app)
 # login_manager.login_view = 'login'
 #
 #
@@ -32,7 +32,7 @@ geolocator = GoogleV3()
 # 		return None
 
 
-@application.before_request
+@app.before_request
 def before_request():
 	"""Connect to the database before each request."""
 	# g.db = models.DATABASE
@@ -40,14 +40,14 @@ def before_request():
 	g.user = current_user
 #
 #
-# @application.after_request
+# @app.after_request
 # def after_request(response):
 # 	"""Close the database connection after each request."""
 # 	g.db.close()
 # 	return response
 
 
-# @application.route('/register', methods=('GET', 'POST'))
+# @app.route('/register', methods=('GET', 'POST'))
 # def register():
 # 	form = forms.RegisterForm()
 # 	if form.validate_on_submit():
@@ -61,7 +61,7 @@ def before_request():
 # 	return render_template('register.html', form=form)
 #
 #
-# @application.route('/login', methods=('GET', 'POST'))
+# @app.route('/login', methods=('GET', 'POST'))
 # def login():
 # 	form = forms.LoginForm()
 # 	if form.validate_on_submit():
@@ -79,7 +79,7 @@ def before_request():
 # 	return render_template('login.html', form=form)
 #
 #
-# @application.route('/logout')
+# @app.route('/logout')
 # @login_required
 # def logout():
 # 	logout_user()
@@ -104,7 +104,7 @@ map_center = (40.7484284, -73.9856545199)
 global sign_locations, sign_contents
 
 
-@application.route('/', methods=('GET', 'POST'))
+@app.route('/', methods=('GET', 'POST'))
 def index():
 	global map_center, sign_locations, sign_contents
 	form = forms.PostForm()
@@ -126,9 +126,28 @@ def index():
 	                       locations=sign_locations, contents=sign_contents)
 	# return render_template("index.html")
 
-@application.errorhandler(404)
+@app.errorhandler(404)
 def not_found(error):
 	return render_template('404.html'), 404
+
+
+
+@app.route("/test")
+def mapview():
+    mymap = Map(
+        identifier="view-side",
+        lat=37.4419,
+        lng=-122.1419,
+        markers=[(37.4419, -122.1419)]
+    )
+    sndmap = Map(
+        identifier="sndmap",
+        lat=37.4419,
+        lng=-122.1419,
+        markers={'http://maps.google.com/mapfiles/ms/icons/green-dot.png':[(37.4419, -122.1419)],
+                 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png':[(37.4300, -122.1400)]}
+    )
+    return render_template('example.html', mymap=mymap, sndmap=sndmap)
 
 
 if __name__ == '__main__':
@@ -146,6 +165,6 @@ if __name__ == '__main__':
 	sign_locations, sign_contents = get_signs_of_center()
 	# print sign_locations
 	# print sign_contents,
-	# GoogleMaps(application)
+	# GoogleMaps(app)
 	print len(sign_locations), len(sign_contents)
-	application.run(debug=True)
+	app.run(debug=True)
