@@ -53,7 +53,7 @@ if 'HEROKU' in os.environ:
 	url = urlparse.urlparse(os.environ["DATABASE_URL"])
 	db = PostgresqlDatabase(database=url.path[1:], user=url.username, password=url.password, host=url.hostname, port=url.port)
 	DATABASE.initialize(db)
-	DEBUG = False
+	DEBUG = True
 else:
 	db = SqliteDatabase('nyc-parking-app-backend.db')
 	DATABASE.initialize(db)
