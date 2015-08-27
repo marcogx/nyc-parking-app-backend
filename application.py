@@ -147,4 +147,4 @@ if __name__ == '__main__':
 	print sign_locations
 	print sign_contents,
 	print len(sign_locations), len(sign_contents)
-	application.run(debug=models.DEBUG, host=HOST, port=PORT)
+	application.run(debug=models.DEBUG)
