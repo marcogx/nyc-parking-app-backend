@@ -1,32 +1,17 @@
 {% extends "layout.html" %}
-{#{% from 'macros.html' import render_field %}#}
-
 {% block content %}
-
-{#  <div class="field">#}
-{#        {% if field.errors %}#}
-{#            {% for error in field.errors %}#}
-{#                <div class="notification error">{{ error }}</div>#}
-{#            {% endfor %}#}
-{#        {% endif %}#}
-{#        {{ field(placeholder=field.label.text) }}#}
-{#    </div>#}
-
-
 
   <form method=POST action="">
     {{ form.hidden_tag() }}
     {% for field in form %}
-        <div class="field">
+      <div class="field">
         {% if field.errors %}
             {% for error in field.errors %}
                 <div class="notification error">{{ error }}</div>
             {% endfor %}
         {% endif %}
         {{ field(placeholder=field.label.text) }}
-    </div>
-
-{#        {{ render_field(field) }}#}
+      </div>
     {% endfor %}
     <button type=submit id=submit>Explore Parking Signs Near It !</button>
   </form>
@@ -38,20 +23,16 @@
     {% set style = "width:800px;height:650px;"%}
     {% set locations =  locations %}
     {% set contents = contents %}
-    {{ locations }}
-    {{ contents }}
-{#    {{#}
-{#      googlemap(#}
-{#          "sign_map",#}
-{#          center_lat,#}
-{#          center_lng,#}
-{#          zoom=18,#}
-{#          infobox=contents,#}
-{#          markers={'http://maps.google.com/mapfiles/ms/icons/red-dot.png':[(center_lat, center_lng)],#}
-{#                    'http://maps.google.com/mapfiles/ms/icons/green-dot.png':locations},#}
-{#          style=style#}
-{#      )#}
-{#    }}#}
+
+    {{ googlemap(
+          "sign_map",
+          center_lat,
+          center_lng,
+          zoom=18,
+          infobox=contents,
+          markers={'http://maps.google.com/mapfiles/ms/icons/red-dot.png':[(center_lat, center_lng)],
+                    'http://maps.google.com/mapfiles/ms/icons/green-dot.png':locations},
+          style=style) }}
 
   {% endwith %}
 
