@@ -1,5 +1,5 @@
 from flask import Flask, render_template, flash
-from flask_googlemaps import GoogleMaps, Map
+from flask_googlemaps import GoogleMaps
 from geopy.geocoders import GoogleV3
 import forms
 import csv
@@ -43,13 +43,10 @@ def index():
 				flash("Something wrong with your address typed or your network problem ", "error")
 		except:
 			flash("Something wrong with your address typed or your network problem ", "error")
+
 		if location:
 			map_center = location.latitude, location.longitude
 			locations, contents = get_signs_of_center(map_center[0], map_center[1])
-
-		return render_template('parking_signs.html', form=form,
-		                       lat=map_center[0], lng=map_center[1],
-		                       locations=locations, contents=contents)
 
 	return render_template('parking_signs.html', form=form,
 	                       lat=map_center[0], lng=map_center[1],
@@ -60,30 +57,5 @@ def index():
 def not_found(error):
 	return render_template('404.html'), 404
 
-
-@app.route("/test", methods=('GET', 'POST'))
-def mapview():
-	mymap = Map(
-		identifier="view-side",
-		lat=37.4419,
-		lng=-122.1419,
-		markers=[(37.4419, -122.1419)]
-	)
-	sndmap = Map(
-		identifier="sndmap",
-		lat=37.4419,
-		lng=-122.1419,
-		markers={'http://maps.google.com/mapfiles/ms/icons/green-dot.png': [(37.4419, -122.1419)],
-		         'http://maps.google.com/mapfiles/ms/icons/blue-dot.png': [(37.4300, -122.1400)]}
-	)
-	return render_template('example.html', mymap=mymap, sndmap=sndmap)
-
-
 if __name__ == '__main__':
-	# global sign_locations, sign_contents
-	sign_locations, sign_contents = get_signs_of_center()
-	print sign_locations
-	print sign_contents,
-	# GoogleMaps(app)
-	print len(sign_locations), len(sign_contents)
 	app.run(debug=True)
